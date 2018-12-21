@@ -1,5 +1,5 @@
 [Unit]
-Description=Messaging and Integration Patterns provider
+Description=ActiveMQ Message Broker
 After=local-fs.target
 After=network.target
 
