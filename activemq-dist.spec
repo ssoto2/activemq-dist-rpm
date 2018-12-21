@@ -91,7 +91,7 @@ popd
 #
 # Fix up binaries
 #
-rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-*
+rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
 rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
 
