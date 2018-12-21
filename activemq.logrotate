@@ -1,7 +1,7 @@
 /var/log/activemq/*log {
-	weekly
+	daily
 	copytruncate
-	rotate 52
+	rotate 14
 	missingok
 	notifempty
 	compress
