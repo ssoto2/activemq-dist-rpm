@@ -4,7 +4,6 @@
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
 %define __requires_exclude_from ^.*\\.jar$
 %define __provides_exclude_from ^.*\\.jar$
-%undefine       _disable_source_fetch
 
 Name:           activemq-dist
 Version:        5.15.8
