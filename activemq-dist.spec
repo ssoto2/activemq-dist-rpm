@@ -17,7 +17,7 @@ Source1:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.
 Source2:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.service
 Source3:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.logrotate
 Patch0:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/init.d.patch
-Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/wrapperr.conf.patch
+Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/wrapper.conf.patch
 Patch2:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/log4j.patch
 BuildRoot:      %{_tmppath}/%{pkgname}-%{version}-%{release}-root-%(%{__id_u} -n)
 
