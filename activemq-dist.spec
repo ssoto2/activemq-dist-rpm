@@ -14,12 +14,12 @@ Group:          Networking/Daemons
 License:        ASL 2.0
 URL:            http://activemq.apache.org/
 Source0:        https://ftp.halifax.rwth-aachen.de/apache/activemq/%{version}/%{pkgname}-%{version}-bin.tar.gz
-Source1:        activemq-conf
-Source2:        activemq.service
-Source3:        activemq.logrotate
-Patch0:         init.d.patch
-Patch1:         wrapperr.conf.patch
-Patch2:         log4j.patch
+Source1:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq-conf
+Source2:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.service
+Source3:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.logrotate
+Patch0:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/init.d.patch
+Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/wrapperr.conf.patch
+Patch2:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/log4j.patch
 BuildRoot:      %{_tmppath}/%{pkgname}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
