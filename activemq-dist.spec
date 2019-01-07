@@ -4,6 +4,7 @@
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
 %define __requires_exclude_from ^.*\\.jar$
 %define __provides_exclude_from ^.*\\.jar$
+%undefine       _disable_source_fetch
 
 Name:           activemq-dist
 Version:        5.15.8
@@ -13,12 +14,12 @@ Group:          Networking/Daemons
 License:        ASL 2.0
 URL:            http://activemq.apache.org/
 Source0:        https://ftp.halifax.rwth-aachen.de/apache/activemq/%{version}/%{pkgname}-%{version}-bin.tar.gz
-Source1:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq-conf
-Source2:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.service
-Source3:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.logrotate
-Patch0:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/init.d.patch
-Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/wrapper.conf.patch
-Patch2:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/log4j.patch
+Source1:        activemq-conf
+Source2:        activemq.service
+Source3:        activemq.logrotate
+Patch0:         init.d.patch
+Patch1:         wrapperr.conf.patch
+Patch2:         log4j.patch
 BuildRoot:      %{_tmppath}/%{pkgname}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
@@ -66,10 +67,6 @@ ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # Fix default connections
 sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
-   $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
-
-# Disable web ui by default
-sed -i 's_\(<import resource="jetty.xml"/>\)_<!--\1-->_' \
    $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
 
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
