@@ -1,9 +1,10 @@
 %global pkgname apache-%{project}
 %global project activemq
-
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
 %define __requires_exclude_from ^.*\\.jar$
 %define __provides_exclude_from ^.*\\.jar$
+%define debug_package %{nil}
+%define amqhome /usr/share/%{project}
 
 Name:           activemq-dist
 Version:        5.15.8
@@ -26,8 +27,6 @@ BuildArch: noarch
 BuildRequires:  systemd
 Requires:       java-headless >= 1:1.8.0
 Requires:       which
-
-%define amqhome /usr/share/%{project}
 
 %package client
 Summary: Client jar for Apache ActiveMQ
