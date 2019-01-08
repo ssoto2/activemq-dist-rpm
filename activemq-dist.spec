@@ -51,20 +51,20 @@ ActiveMQ Messaging Broker
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{amqhome}
-mv * $RPM_BUILD_ROOT%{amqhome}
+mv bin lib webapps $RPM_BUILD_ROOT%{amqhome}
 
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
 ln -s %{amqhome}/bin/activemq       $RPM_BUILD_ROOT/usr/bin/activemq
 
-# Disable Java RMI
+# DISABLE JAVA RMI
 sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amqhome}/bin/env
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
 mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
-# Fix default connections
+# FIX DEFAULT CONNECTIONS
 sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
    $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
 
@@ -84,9 +84,8 @@ pushd %{buildroot}%{_javadir}
    done
 popd
 
-#
-# Fix up binaries
-#
+
+# FIX UP BINARIES 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-%{amqarch}/wrapper.conf $RPM_BUILD_ROOT/etc/activemq
