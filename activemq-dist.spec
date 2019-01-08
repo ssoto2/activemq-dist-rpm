@@ -61,8 +61,7 @@ mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP HOME DIRECTORY
-
-/bin/bash mv !(docs) ./*/ $RPM_BUILD_ROOT%{amqhome}
+mv bin lib webapps $RPM_BUILD_ROOT%{amqhome}
 
 # SETUP LOGGING DIRECTORY
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
