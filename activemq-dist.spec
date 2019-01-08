@@ -88,16 +88,15 @@ popd
 # FIX UP BINARIES 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT/etc/activemq
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
 
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
 
-# Fix up permissions (rpmlint complains)
-#
+# FIX UP PERMISSIONS (rpmlint complains)
 find $RPM_BUILD_ROOT%{amqhome}/webapps -executable -type f -exec chmod -x '{}' \;
 
-# Install Systemd unit file
+# INSTALL SYSTEMD UNIT FILE
 install -p -D -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_unitdir}/activemq.service
 
 # Install logrotate configuration
