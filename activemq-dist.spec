@@ -7,8 +7,6 @@
 %define debug_package %{nil}
 %define amqhome /usr/share/%{project}
 
-%_buildshell /bin/bash
-
 Name:           activemq-dist
 Version:        5.15.8
 Release:        1%{?dist}
@@ -64,7 +62,7 @@ ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP HOME DIRECTORY
 
-mv !(docs) ./*/ $RPM_BUILD_ROOT%{amqhome}
+/bin/bash mv !(docs) ./*/ $RPM_BUILD_ROOT%{amqhome}
 
 # SETUP LOGGING DIRECTORY
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
