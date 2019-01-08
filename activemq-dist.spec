@@ -61,7 +61,7 @@ mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP HOME DIRECTORY
-mv ./* $RPM_BUILD_ROOT%{amqhome}
+mv ./*/ $RPM_BUILD_ROOT%{amqhome}
 
 # SETUP LOGGING DIRECTORY
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
@@ -76,14 +76,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
 ln -s %{amqhome}/bin/activemq       $RPM_BUILD_ROOT/usr/bin/activemq
 
-# DISABLE JAVA RMI
-sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amqhome}/bin/env
-
-# FIX DEFAULT CONNECTIONS
-sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
-   $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
-
-# SET UP JAR DIRECTORY
+# SET UP JAR FILES
 install -D -m 0644 activemq-all-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/activemq-all-%{version}.jar
 chmod a-x $RPM_BUILD_ROOT%{_javadir}/*
 pushd %{buildroot}%{_javadir}
@@ -93,29 +86,32 @@ pushd %{buildroot}%{_javadir}
    	done
 popd
 
+# INSTALL FILES
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
+install -p -D -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_unitdir}/activemq.service
+install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
-# FIX UP BINARIES 
+# CLEANUP 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
 
-install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
 
 # FIX UP PERMISSIONS (rpmlint complains)
 find $RPM_BUILD_ROOT%{amqhome}/webapps -executable -type f -exec chmod -x '{}' \;
 
-# INSTALL SYSTEMD UNIT FILE
-install -p -D -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_unitdir}/activemq.service
 
-# Install logrotate configuration
-install -p -D -m 0644 %{SOURCE3} \
-   %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+# DISABLE JAVA RMI
+sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amqhome}/bin/env
+
+# FIX DEFAULT CONNECTIONS
+sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
+   $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %pre
 # Add the "activemq" user and group
