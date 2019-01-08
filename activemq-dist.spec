@@ -49,20 +49,27 @@ ActiveMQ Messaging Broker
 /bin/true
 
 %install
+# BUILD HOME DIRECTORY
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{amqhome}
+
+# BUILD CONFIGURATION DIRECOTRY
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
+
+# SETUP CONFIGURATIONS DIRECTORY
+mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
+
+# SETUP HOME DIRECTORY
 mv * $RPM_BUILD_ROOT%{amqhome}
 
+# SETUP BINARY FILES
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
 ln -s %{amqhome}/bin/activemq       $RPM_BUILD_ROOT/usr/bin/activemq
 
 # DISABLE JAVA RMI
 sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amqhome}/bin/env
-
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
-mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
-ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # FIX DEFAULT CONNECTIONS
 sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
