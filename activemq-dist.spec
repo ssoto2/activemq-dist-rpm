@@ -51,7 +51,7 @@ ActiveMQ Messaging Broker
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{amqhome}
-mv bin lib webapps $RPM_BUILD_ROOT%{amqhome}
+mv * $RPM_BUILD_ROOT%{amqhome}
 
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
