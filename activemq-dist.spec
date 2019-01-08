@@ -88,7 +88,7 @@ popd
 # FIX UP BINARIES 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-%{amqarch}/wrapper.conf $RPM_BUILD_ROOT/etc/activemq
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT/etc/activemq
 rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
 
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
