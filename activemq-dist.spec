@@ -1,10 +1,13 @@
 %global pkgname apache-%{project}
 %global project activemq
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
+
 %define __requires_exclude_from ^.*\\.jar$
 %define __provides_exclude_from ^.*\\.jar$
 %define debug_package %{nil}
 %define amqhome /usr/share/%{project}
+
+%_buildshell /bin/bash
 
 Name:           activemq-dist
 Version:        5.15.8
@@ -60,6 +63,7 @@ mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP HOME DIRECTORY
+
 mv !(docs) ./*/ $RPM_BUILD_ROOT%{amqhome}
 
 # SETUP LOGGING DIRECTORY
