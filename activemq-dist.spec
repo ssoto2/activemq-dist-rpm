@@ -63,6 +63,14 @@ ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 # SETUP HOME DIRECTORY
 mv * $RPM_BUILD_ROOT%{amqhome}
 
+# SETUP LOGGING DIRECTORY
+mkdir -p $RPM_BUILD_ROOT/var/log/activemq
+ln -s /var/log/activemq $RPM_BUILD_ROOT%{amqhome}/log
+
+# SETUP DATA DIRECTORY
+mkdir -p $RPM_BUILD_ROOT/var/lib/activemq/data
+ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
+
 # SETUP BINARY FILES
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
@@ -75,11 +83,6 @@ sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amq
 sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
    $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
 
-mkdir -p $RPM_BUILD_ROOT/var/log/activemq
-ln -s /var/log/activemq $RPM_BUILD_ROOT%{amqhome}/log
-
-mkdir -p $RPM_BUILD_ROOT/var/lib/activemq/data
-ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
 
 install -D -m 0644 activemq-all-%{version}.jar \
    $RPM_BUILD_ROOT%{_javadir}/activemq-all-%{version}.jar
