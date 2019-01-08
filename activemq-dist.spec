@@ -23,8 +23,6 @@ Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.
 Patch2:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/log4j.patch
 BuildRoot:      %{_tmppath}/%{pkgname}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildArch: noarch
-
 BuildRequires:  systemd
 Requires:       java-headless >= 1:1.8.0
 Requires:       which
