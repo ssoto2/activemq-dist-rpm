@@ -61,7 +61,7 @@ mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP HOME DIRECTORY
-mv */ $RPM_BUILD_ROOT%{amqhome}
+mv ./* $RPM_BUILD_ROOT%{amqhome}
 
 # SETUP LOGGING DIRECTORY
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
@@ -83,15 +83,14 @@ sed -i 's/^ACTIVEMQ_SUNJMX_START=/#ACTIVEMQ_SUNJMX_START=/' $RPM_BUILD_ROOT%{amq
 sed -i 's_\(<transportConnector.*/>\)_<!--\1-->_' \
    $RPM_BUILD_ROOT%{_sysconfdir}/activemq/activemq.xml
 
-
-install -D -m 0644 activemq-all-%{version}.jar \
-   $RPM_BUILD_ROOT%{_javadir}/activemq-all-%{version}.jar
+# SET UP JAR DIRECTORY
+install -D -m 0644 activemq-all-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/activemq-all-%{version}.jar
 chmod a-x $RPM_BUILD_ROOT%{_javadir}/*
 pushd %{buildroot}%{_javadir}
-   for jar in *-%{version}*
-   do
-      ln -sf ${jar} `echo $jar | sed  "s|-%{version}||g"`
-   done
+	for jar in *-%{version}*
+   	do
+      		ln -sf ${jar} `echo $jar | sed  "s|-%{version}||g"`
+   	done
 popd
 
 
