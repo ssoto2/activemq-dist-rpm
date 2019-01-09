@@ -70,7 +70,7 @@ ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
 
 # SETUP LIBRARY DIRECTORY
 mkdir -p $RPM_BUILD_ROOT%/usr/lib/%{project}
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%/usr/lib/%{project}
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%/usr/lib/%{project}/linux
 ln -s /usr/lib/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64
 
 # SETUP TMP DIRECTORY
