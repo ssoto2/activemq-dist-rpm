@@ -69,6 +69,14 @@ ln -s /var/log/activemq $RPM_BUILD_ROOT%{amqhome}/log
 mkdir -p $RPM_BUILD_ROOT/var/lib/activemq/data
 ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
 
+# SETUP LIBRARY DIRECTORY
+mkdir -p $RPM_BUILD_ROOT%{%_libdir}/%{project}
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%{%_libdir}/%{project}
+ln -s %{%_libdir}/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-%{amqarch}
+
+# SETUP TMP DIRECTORY
+mkdir -p $RPM_BUILD_ROOT%{amqhome}/tmp
+
 # SETUP BINARY FILES
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 ln -s %{amqhome}/bin/activemq-admin $RPM_BUILD_ROOT/usr/bin/activemq-admin
