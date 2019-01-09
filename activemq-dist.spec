@@ -50,15 +50,14 @@ ActiveMQ Messaging Broker
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{amqhome}
 
-# BUILD CONFIGURATION DIRECOTRY
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
-
-# SETUP CONFIGURATIONS DIRECTORY
-mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
-ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
-
 # SETUP HOME DIRECTORY
 mv bin lib webapps $RPM_BUILD_ROOT%{amqhome}
+
+# SETUP CONFIGURATIONS DIRECTORY
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
+mv conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+ln -s %{_sysconfdir}/activemq $RPM_BUILD_ROOT%{amqhome}/conf
 
 # SETUP LOGGING DIRECTORY
 mkdir -p $RPM_BUILD_ROOT/var/log/activemq
