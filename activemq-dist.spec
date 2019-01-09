@@ -95,7 +95,7 @@ popd
 
 # INSTALL FILES
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
-install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 # CLEANUP 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
