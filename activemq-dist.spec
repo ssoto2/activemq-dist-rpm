@@ -147,7 +147,7 @@ getent passwd %{project} >/dev/null || \
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %config(noreplace) %{_sysconfdir}/activemq/*
 %config(noreplace) %{_sysconfdir}/activemq
-/usr/lib/%{project}
+/usr/lib/%{project}/*
 %attr(0755,root,root) /etc/init.d/activemq
 %attr(755,activemq,activemq) %dir /var/log/activemq
 %attr(755,activemq,activemq)  /var/lib/activemq
