@@ -16,8 +16,7 @@ License:        ASL 2.0
 URL:            http://activemq.apache.org/
 Source0:        https://ftp.halifax.rwth-aachen.de/apache/activemq/%{version}/%{pkgname}-%{version}-bin.tar.gz
 Source1:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq-conf
-Source2:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.service
-Source3:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.logrotate
+Source2:        https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/activemq.logrotate
 Patch0:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/init.d.patch
 Patch1:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/wrapper.conf.patch
 Patch2:         https://raw.githubusercontent.com/ssoto2/activemq-dist-rpm/5.15.8/log4j.patch
@@ -94,8 +93,8 @@ popd
 
 # INSTALL FILES
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
-install -p -D -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_unitdir}/activemq.service
 install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 # CLEANUP 
@@ -128,20 +127,19 @@ getent passwd %{project} >/dev/null || \
         -d /usr/share/activemq activemq &>/dev/null || :
 
 %post
-%systemd_post activemq.service
+
 
 %preun
-%systemd_preun activemq.service
+
 
 %postun
-%systemd_postun activemq.service
+
 
 
 %files
 %defattr(-,root,root,-)
 %doc LICENSE NOTICE README.txt docs/
 %{amqhome}*
-%{_unitdir}/activemq.service
 /usr/bin/activemq
 /usr/bin/activemq-admin
 %config(noreplace) %{_sysconfdir}/activemq.conf
