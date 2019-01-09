@@ -68,6 +68,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/activemq/data
 ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
 
 # SETUP SYSTEM FILES
+mkdir -p $RPM_BUILD_ROOT/var/run/activemq
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 
 # SETUP LIBRARY DIRECTORY
@@ -144,6 +145,7 @@ getent passwd %{project} >/dev/null || \
 /usr/bin/activemq-admin
 %config(noreplace) %{_sysconfdir}/activemq.conf
 %config(noreplace) %{_sysconfdir}/activemq
+%attr(0755,root,root) /etc/init.d/activemq
 %attr(755,activemq,activemq) %dir /var/log/activemq
 %attr(755,activemq,activemq)  /var/lib/activemq
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
