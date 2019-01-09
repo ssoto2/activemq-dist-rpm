@@ -92,7 +92,7 @@ pushd %{buildroot}%{_javadir}
 popd
 
 # INSTALL FILES
-mv /usr/lib/%{project}/linux/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+mv $RPM_BUILD_ROOT/usr/lib/%{project}/linux/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
 install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
