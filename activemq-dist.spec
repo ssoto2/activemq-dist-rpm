@@ -69,9 +69,9 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/activemq/data
 ln -s /var/lib/activemq/data $RPM_BUILD_ROOT/%{amqhome}/data
 
 # SETUP LIBRARY DIRECTORY
-mkdir -p $RPM_BUILD_ROOT%{%_libdir}/%{project}
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%{%_libdir}/%{project}
-ln -s %{%_libdir}/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-%{amqarch}
+mkdir -p $RPM_BUILD_ROOT%/usr/lib/%{project}
+mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%/usr/lib/%{project}
+ln -s /usr/lib/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64
 
 # SETUP TMP DIRECTORY
 mkdir -p $RPM_BUILD_ROOT%{amqhome}/tmp
@@ -92,7 +92,7 @@ pushd %{buildroot}%{_javadir}
 popd
 
 # INSTALL FILES
-mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
+mv %{%_libdir}/%{project}/linux/wrapper.conf $RPM_BUILD_ROOT%{_sysconfdir}/activemq
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 install -D -m 0644 %{SOURCE1}  $RPM_BUILD_ROOT%{_sysconfdir}/activemq.conf
 install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
