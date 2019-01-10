@@ -73,7 +73,7 @@ mkdir -p $RPM_BUILD_ROOT/var/run/activemq
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 
 # SETUP LIBRARY DIRECTORY
-mkdir -p $RPM_BUILD_ROOT%/usr/lib/%{project}/
+mkdir -p $RPM_BUILD_ROOT%/usr/lib/%{project}
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%/usr/lib/%{project}/linux
 ln -s /usr/lib/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64
 
@@ -142,6 +142,7 @@ getent passwd %{project} >/dev/null || \
 %defattr(-,root,root,-)
 %doc LICENSE NOTICE README.txt docs/
 %{amqhome}*
+/usr/lib/%{project}*
 /usr/bin/activemq
 /usr/bin/activemq-admin
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
