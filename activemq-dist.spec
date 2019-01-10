@@ -142,7 +142,7 @@ getent passwd %{project} >/dev/null || \
 %defattr(-,root,root,-)
 %doc LICENSE NOTICE README.txt docs/
 %{amqhome}*
-/usr/lib/%{project}*
+/usr/lib/%{project}
 /usr/bin/activemq
 /usr/bin/activemq-admin
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
