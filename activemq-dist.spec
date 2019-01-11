@@ -151,6 +151,7 @@ getent passwd %{project} >/dev/null || \
 %attr(0755,root,root) /etc/init.d/activemq
 %attr(755,activemq,activemq) %dir /var/log/activemq
 %attr(755,activemq,activemq)  /var/lib/activemq
+%attr(755,activemq,activemq) %dir /var/run/activemq
 
 %files client
 %defattr(-,root,root,-)
