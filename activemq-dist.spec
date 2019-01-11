@@ -73,7 +73,7 @@ mkdir -p $RPM_BUILD_ROOT/var/run/activemq
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64/activemq $RPM_BUILD_ROOT/etc/init.d
 
 # SETUP LIBRARY DIRECTORY
-mkdir -p $RPM_BUILD_ROOT%_libdir/%{project}/linux
+mkdir -p $RPM_BUILD_ROOT%_libdir/%{project}
 mv $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64 $RPM_BUILD_ROOT%_libdir/%{project}/linux
 ln -s %{_libdir}/%{project}/linux $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-64
 
@@ -158,6 +158,10 @@ getent passwd %{project} >/dev/null || \
 %{_javadir}
 
 %changelog
+* Sat Dec 08 2018 Shauna Soto <ssoto@emich.edu> - 5.15.8-1
+- Made platform specific
+- enabled webui by default
+
 * Sat Dec 08 2018 Lars Kiesow <lkiesow@uos.de> - 5.15.8-1
 - Update to 5.15.8
 
