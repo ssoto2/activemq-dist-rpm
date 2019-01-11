@@ -102,7 +102,7 @@ install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 # CLEANUP 
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/linux-x86-32
 rm -rf $RPM_BUILD_ROOT%{amqhome}/bin/macosx
-rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
+#rm $RPM_BUILD_ROOT%{amqhome}/bin/wrapper.jar
 
 
 # FIX UP PERMISSIONS (rpmlint complains)
