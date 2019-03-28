@@ -17,7 +17,7 @@ Build: x86-64
 
 This build uses the java service wrapper, if more then 4GB of memory is required you will need to use the wrapper from https://wrapper.tanukisoftware.com
 
-Using Tanuki: 
-libwrapper.so -> /usr/lib64/activemq/linux
-wrapper -> /usr/lib64/activemq/linux
-wrapper.jar -> /usr/share/activemq/bin
+Using Tanuki:   
+libwrapper.so -> /usr/lib64/activemq/linux  
+wrapper -> /usr/lib64/activemq/linux  
+wrapper.jar -> /usr/share/activemq/bin  
